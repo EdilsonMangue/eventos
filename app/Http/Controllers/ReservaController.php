@@ -8,6 +8,7 @@ use App\Models\Pacote;
 use App\Models\Pagamento;
 use App\Models\Reserva;
 use App\Models\Servico;
+use App\Models\TipoEvento;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class ReservaController extends Controller
     public function index()
     {
         try {
-            $reserva =  Reserva::with(['itens.servico', 'cliente'])->get();
+            $reserva =  Reserva::with(['itens.servico', 'cliente'])->orderBy('id','DESC')->paginate(15);
            // return $reserva;
             return view('reserva.index', ['reservas' => $reserva]);
         } catch (\Throwable $th) {
@@ -30,6 +31,21 @@ class ReservaController extends Controller
         }
     }
 
+    public function reserva_cliente()
+    {
+       
+        try {
+            $cliente = Cliente::where('user_id', Auth::user()->id)->get();
+            $reserva =  Reserva::with(['itens.servico', 'cliente', 'tipoevento'])
+            ->where('cliente_id',  $cliente[0]->id)->orderBy('id','DESC')->paginate(15);
+           // return $reserva;
+            return view('userCliente.index_reserva', ['reservas' => $reserva]);
+        } catch (\Throwable $th) {
+           
+
+        } 
+    }
+
     public function create()
     {
 
@@ -37,7 +53,22 @@ class ReservaController extends Controller
 
             $pacote = Pacote::with('servicos')->get();
             $clientes = Cliente::get();
-            return view('reserva.create', ['pacotes' => $pacote, 'clientes' => $clientes]);
+            $tipos = TipoEvento::all();
+            return view('reserva.create', ['pacotes' => $pacote, 'clientes' => $clientes, 'tipos' => $tipos]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            $th->getMessage();
+        }
+    }
+
+    public function reserva_create()
+    {
+        
+        try {
+
+            $pacote = Pacote::with('servicos')->get();
+            $tipos = TipoEvento::all();
+            return view('userCliente.create_reserva', ['pacotes' => $pacote,'tipos' => $tipos]);
         } catch (\Throwable $th) {
             //throw $th;
             $th->getMessage();
@@ -76,7 +107,12 @@ class ReservaController extends Controller
              $reserva->user_id = Auth::user()->id;
              $reserva->status = 'pendente';
              $reserva->total = $total;
+             $reserva->data_inicio = $request->data_inicio;
+             $reserva->data_fim = $request->data_fim;
+             $reserva->hora_inicio =  $request->hora_inicio;
+             $reserva->hora_fim = $request->hora_fim;
              $reserva->reserva_no = "RLA/".$request->cliente."/".($last->id + 1);
+             $reserva->tipo_evento_id = $request->tipo_evento;
              $reserva->save();
 
              
@@ -105,6 +141,71 @@ class ReservaController extends Controller
         }
     }
 
+
+    public function reserva_store(Request $request)
+    {
+     
+        try {
+
+            // return $request->all();
+            $qty = array_map(function ($value) {
+                return $value === null ? 0 : $value;
+            }, $request->qty);
+
+            $total = 0;
+            foreach($request->servicos as $index => $servicoId){
+
+                if ($qty[$index] > 0) {
+                $servico = Servico::find($servicoId);
+
+                $total_item =  $servico->preco * $qty[$index];
+
+                $total += $total_item;
+                }
+
+             }
+           
+             $last = Reserva::orderBy('id', 'DESC')->first();
+             $cliente = Cliente::where('user_id', Auth::user()->id)->get();
+            //  return $cliente[0]->id;
+             $reserva = new Reserva();
+             $reserva->cliente_id =$cliente[0]->id;
+             $reserva->user_id = Auth::user()->id;
+             $reserva->status = 'pendente';
+             $reserva->total = $total;
+             $reserva->data_inicio = $request->data_inicio;
+             $reserva->data_fim = $request->data_fim;
+             $reserva->hora_inicio =  $request->hora_inicio;
+             $reserva->hora_fim = $request->hora_fim;
+             $reserva->reserva_no = "RLA/".$cliente[0]->id."/".($last->id + 1);
+             $reserva->tipo_evento_id = $request->tipo_evento;
+             $reserva->save();
+
+             
+             $total_item = 0;
+             foreach ($request->servicos as $index => $servicoId) {
+                if ($qty[$index] > 0) {
+                    $item = new ItemReserva();
+            
+                    $item->reserva_id = $reserva->id;
+                    $item->servico_id = $servicoId;
+                    $item->quantidade = $qty[$index];
+            
+                    $item->save();
+                }
+            }
+            
+            
+
+           
+
+            return redirect()->route('reserva.cliente');
+        } catch (\Throwable $th) {
+            //throw $th;
+
+            return $th->getMessage();
+        }
+    }
     /**
      * Display the specified resource.
      */
@@ -133,6 +234,19 @@ class ReservaController extends Controller
         }
     }
 
+
+    public function detalhe_cliente(string $id)
+    {
+        try {
+            //code...
+            $reserva =  Reserva::with(['itens.servico', 'cliente'])->find($id);
+
+           // return $reserva;
+           return view('userCliente.detalhe_reserva', ['reservas' => $reserva]);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage());
+        }
+    }
     public function edit(string $id)
     {
         $reserva =  Reserva::with(['itens.servico', 'cliente'])->find($id);
@@ -171,8 +285,12 @@ class ReservaController extends Controller
                  $reserva =  Reserva::find($id);
                  $reserva->cliente_id = $request->cliente;
                 // $reserva->user_id = Auth::user()->id;
-                 $reserva->status = 'pendente';
+                 $reserva->status =  $request->status;
                  $reserva->total = $total;
+                 $reserva->data_inicio = $request->data_inicio;
+                 $reserva->data_fim = $request->data_fim;
+                 $reserva->hora_inicio =  $request->hora_inicio;
+                 $reserva->hora_fim = $request->hora_fim;
                  $reserva->save();
     
                  

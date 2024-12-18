@@ -39,7 +39,7 @@
     </style>
 </head>
 <body>
-    <h1 style="font-size: 13px">Relatório de Reserva</h1>
+    <h1 style="font-size: 13px">Reserva</h1>
 
     <div class="info">
         <p><strong>Cliente:</strong>{{$data?->cliente?->name}}</p>
@@ -49,6 +49,27 @@
         <p><strong>Rec:</strong> {{$data?->reserva_no}}</p>
     </div>
 
+    <table>
+        <thead>
+            <tr>
+                <th>Data Inicio</th>
+                <th>Hora Inicio</th>
+                <th>Data Fim</th>
+                <th>Hora Fim</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{-- @foreach($data as $value) --}}
+            <tr>
+                <td>{{$data?->data_inicio}}</td>
+                <td>{{$data?->hora_inicio}}</td>
+                <td>{{$data?->data_fim}}</td>
+                <td>{{$data?->hora_fim}}</td>
+            </tr>
+            {{-- @endforeach --}}
+        </tbody>
+    </table>
     <table>
         <thead>
             <tr>

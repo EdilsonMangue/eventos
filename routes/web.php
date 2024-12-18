@@ -40,19 +40,20 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/auth-login', [AuthController::class, 'index']);
+Route::get('/auth-login', [AuthController::class, 'index'])->name('index.login');
 Route::post('/authlogin', [AuthController::class, 'login']);
 Route::post('/auth-logout', [AuthController::class, 'Logout']);
 Route::get('/registar', [AuthController::class, 'registar']);
+Route::middleware('auth')->group(function () {
 Route::post('/client-registar', [AuthController::class, 'storeRegister']);
 
-Route::get('/menu', [DashboardController::class, 'index']);
+Route::get('/menu', [DashboardController::class, 'index'])->name('dashboard.admin');
 
 Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente.index');
 Route::get('/cliente-create',[ClienteController::class, 'create'])->name('cliente.create');
 Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.store');
 Route::get('/cliente/{id}', [ClienteController::class, 'show']);
-Route::put('/cliente/{id}/update', [ClienteController::class, 'update']);
+Route::put('/cliente/{id}', [ClienteController::class, 'update']);
 Route::delete('/cliente/delete', [ClienteController::class, 'destroy']);
 
 Route::get('/funcionario', [FuncionarioController::class, 'index'])->name('funcionario.index');
@@ -109,4 +110,15 @@ Route::get('/print/reserva/{id}', [ExportController::class, 'printReserva']);
 
 Route::get('/users', [UseController::class, 'index'])->name('user.index');
 
+
+
+// cliente
+
+Route::get('/dashboard-cliente', [DashboardController::class, 'dashboard_cliente'])->name('dashboard.cliente');
+Route::get('/reserva-cliente', [ReservaController::class, 'reserva_cliente'])->name('reserva.cliente');
+Route::get('/reserva-cliente-create', [ReservaController::class, 'reserva_create'])->name('reserva.cliente.create');
+Route::post('/reserva-cliente', [ReservaController::class, 'reserva_store'])->name('reserva.cliente.store');
+Route::get('/detalhe-cliente/{id}', [ReservaController::class, 'detalhe_cliente']);
+Route::get('/cliente-servicos', [servicoController::class, 'servivos_cliente']);
+});
 require __DIR__.'/auth.php';

@@ -11,7 +11,7 @@
                 <span class="p-3 text-success">Criar Cliente</span>
             </div>
             <div class="card-body">
-                <form action="/client-registar" method="POST">
+                <form action="/cliente" method="POST">
                     @csrf
                     @method('POST')
                     <div class="mb-3 row">

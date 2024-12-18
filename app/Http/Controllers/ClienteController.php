@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
 {
@@ -12,7 +14,9 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::get();
+        $clientes = Cliente::with(['user'])->orderBy('id', 'DESC')->paginate(10);
+
+        //return $clientes;
 
         return view('cliente.index', ['clientes'=>$clientes]);
     }
@@ -26,7 +30,28 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $user = new User();
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password =  Hash::make($request->password);
+            $user->permission = "cliente";
+
+            $user->save();
+
+            $client  = new Cliente();
+
+            $client->name = $request->name;
+            $client->user_id = $user->id;
+
+            $client->save();
+
+            return redirect()->route('cliente.index');
+       } catch (\Throwable $th) {
+           
+           return $th->getMessage();
+       }
     }
 
     /**
@@ -34,7 +59,11 @@ class ClienteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $cliente = Cliente::find($id);
+        $user = User::find($cliente->user_id);
+
+       // return $cliente;
+        return view('cliente.editar', ['cliente'=> $cliente, 'user' => $user]);
     }
 
     /**
@@ -42,7 +71,24 @@ class ClienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+        try {
+            $cliente = Cliente::find($id);
+
+            $cliente->name = $request->name;
+            $cliente->endereco = $request->endereco;
+            $cliente->telephone = $request->telefone;
+            
+            $cliente->update();
+
+            $user = User::find($cliente->user_id);
+            $user->name = $request->name;
+
+            $user->update();
+
+            return redirect()->route('cliente.index');
+        } catch (\Throwable $th) {
+           return $th->getMessage();        }
     }
 
     /**

@@ -9,4 +9,9 @@ class Cliente extends Model
 {
     use HasFactory;
     protected $table = "clientes";
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

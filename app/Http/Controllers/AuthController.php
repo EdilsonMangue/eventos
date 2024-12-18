@@ -40,7 +40,12 @@ class AuthController extends Controller
            if (Auth::attempt($credentials, $request->filled('remember'))) {
                $request->session()->regenerate();
         
-               return redirect()->intended('/menu');
+               if(Auth::user()->permission == "Administrador")
+               {
+               return redirect()->route('dashboard.admin');
+               }else if(Auth::user()->permission == "cliente"){
+                return redirect()->route('dashboard.cliente');
+               }
            }
     
            return back()->with(['erro' => 'error ao tentar fazer login']);
@@ -56,6 +61,7 @@ class AuthController extends Controller
              $user->name = $request->name;
              $user->email = $request->email;
              $user->password =  Hash::make($request->password);
+             $user->permission = "cliente";
 
              $user->save();
 

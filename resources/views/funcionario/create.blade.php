@@ -21,12 +21,12 @@
           <input type="text" name="contacto" id="contacto" class="form-control form-control-sm">
           <label for="nr_bi"class="form-label mt-1">Password<span class="text-danger">*</span></label>
           <input type="text" name="password" id="password" class="form-control form-control-sm">
-          <label for="nr_bi"class="form-label mt-1">Nivel de Acesso<span class="text-danger">*</span></label>
+          {{-- <label for="nr_bi"class="form-label mt-1">Nivel de Acesso<span class="text-danger">*</span></label>
           <select name="permissao" id="permissao" class="form-select form-select-sm">
             <option value=""></option>
             <option value="Funcionario">Funcionário</option>
             <option value="Administrador">Administrador</option>
-          </select>
+          </select> --}}
         </div>
         <div class>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

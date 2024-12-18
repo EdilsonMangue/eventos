@@ -15,7 +15,7 @@ class FuncionarioController extends Controller
     public function index()
     {
         
-        $funcionarios = Funcionario::get();
+        $funcionarios = Funcionario::orderBy('id', 'DESC')->paginate(15);
         return view('funcionario.index', ['funcionarios' =>$funcionarios]);
     }
 
@@ -34,7 +34,7 @@ class FuncionarioController extends Controller
 
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->permission = $request->permissao;
+            $user->permission = "Administrador";
             $user->password =  Hash::make($request->password);
     
             $user->save();

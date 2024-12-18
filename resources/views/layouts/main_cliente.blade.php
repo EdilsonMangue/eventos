@@ -37,13 +37,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
+                            <a href="" class="nav-link">{{Auth::user()->permission}}</a>
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user me-2"></i>{{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                {{-- <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li> --}}
                                 <li>
                                   <form action="/auth-logout" method="post">
                                     @csrf
@@ -66,13 +67,13 @@
                 
                     <div class="list-group list-group-flush my-3">
                         <!-- Dashboard -->
-                        <a href="/menu" class="list-group-item list-group-item-action second-text">
+                        <a href="/dashboard-cliente" class="list-group-item list-group-item-action second-text">
                             <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                         </a>
                         
-                        <a href="/cliente" class="list-group-item list-group-item-action second-text">
+                        {{-- <a href="/cliente" class="list-group-item list-group-item-action second-text">
                             <i class="fas fa-tachometer-alt me-2"></i>Cliente
-                        </a>
+                        </a> --}}
                         <!-- Cadastros -->
                         {{-- <div class="mb-1">
                             <a class="list-group-item list-group-item-action  rounded collapsed bg-transparent "
@@ -103,22 +104,22 @@
                             </button>
                             <div class="collapse" id="submenuPatrimonio">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                  {{-- <li><hr class="dropdown-divider"></li>
-                                    <li><a href="/evento" class="link-dark text-decoration-none ps-4 d-block">Evento</a></li> --}}
+                                  <li><hr class="dropdown-divider"></li>
+                                    {{-- <li><a href="/evento" class="link-dark text-decoration-none ps-4 d-block">Evento</a></li> --}}
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a href="/reserva" class="link-dark text-decoration-none ps-4 d-block">Reserva</a></li>
+                                    <li><a href="/reserva-cliente" class="link-dark text-decoration-none ps-4 d-block">Reserva</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a href="/servico" class="link-dark text-decoration-none ps-4 d-block">Servico</a></li>
-                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a href="/cliente-servicos" class="link-dark text-decoration-none ps-4 d-block">Serviço</a></li>
+                                    {{-- <li><hr class="dropdown-divider"></li>
                                     <li><a href="/pacote" class="link-dark text-decoration-none ps-4 d-block">Pacote</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a href="/tipoevento" class="link-dark text-decoration-none ps-4 d-block">Tipo de Evento</a></li>
+                                    <li><a href="/tipoevento" class="link-dark text-decoration-none ps-4 d-block">Tipo de Evento</a></li> --}}
                                 </ul>
                             </div>
                         </div>
                 
                         <!-- Utilizador -->
-                        <div class="mb-1">
+                        {{-- <div class="mb-1">
                             <button class="list-group-item list-group-item-action rounded collapsed"
                                     data-bs-toggle="collapse" data-bs-target="#submenuUtilizador" aria-expanded="false">
                                 <i class="fas fa-user me-2"></i>Utilizador
@@ -132,7 +133,7 @@
                                     
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
           

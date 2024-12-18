@@ -14,6 +14,7 @@ class ExportController extends Controller
     {
         $reserva =  Reserva::with(['itens.servico', 'cliente'])->find($id);
 
+        //dd($reserva->data_inicio);
 
 
         $pdf = Pdf::loadView('relatorio.reserva', [

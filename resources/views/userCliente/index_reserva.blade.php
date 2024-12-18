@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main_cliente')
 
 @section('content')
     
@@ -68,7 +68,7 @@
 <div class="container-fluid px-4">
     <div class="row my-5">
         <div class="text-end">
-            <a href="/reserva-create" class="btn btn-primary" style="width: 140px;">
+            <a href="/reserva-cliente-create" class="btn btn-primary" style="width: 140px;">
                 <i
                 class=" fas fa-solid fa-plus me-1"></i>   Reserva
             </a>
@@ -82,6 +82,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Cliente</th>
+                        <th scope="col">Tipo de Evento</th>
                         <th scope="col">Data</th>
                         <th scope="col">servicos</th>
                         <th scope="col">Valor</th>
@@ -94,19 +95,22 @@
                  @foreach($reservas as $reserva)
                  <tr>
                     <td>{{$reserva?->cliente?->name}}</td>
+                    <td>{{$reserva?->tipoevento?->name}}</td>
                     <td>{{$reserva?->data_inicio}}</td>
                     <td>{{count($reserva?->itens)}}</td>
                     <td>{{$reserva->total}}</td>
                     <td>{{$reserva->status}}</td>
                     <td>
+                        @if(Auth::user()->permission == "Administrador")
                         <a href="/reserva-edit/{{$reserva->id}}" class="btn btn-sm"><i class="far fa-edit"></i></a>
                         <button  value="{{$reserva->id}}"  class="btn btn-sm" id="delete_btn" ><i class="fas fa-solid fa-trash"></i></button>
-                        @if($reserva->status == "pago" || $reserva->status == "cancelado" )
+                        @if($reserva->status == "pago")
                         <button  value="{{$reserva->id}}"  class="btn btn-sm" id="paid_btn" disabled ><i class="fas fa-money-bill"></i></button>
                         @else
                         <button  value="{{$reserva->id}}"  class="btn btn-sm" id="paid_btn"  ><i class="fas fa-money-bill"></i></button>
                         @endif
-                        <a href="/detalhe/{{$reserva->id}}" class="btn btn-sm"><i class="fas fa-eye"></i></a>
+                        @endif
+                        <a href="/detalhe-cliente/{{$reserva->id}}" class="btn btn-sm"><i class="fas fa-eye"></i></a>
                     </td>
                  </tr>
                  @endforeach

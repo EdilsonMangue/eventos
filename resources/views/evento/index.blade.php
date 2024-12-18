@@ -63,6 +63,7 @@
                   
                 </tbody>
             </table>
+            {{ $eventos->links() }}
         </div>
     </div>
 </div>

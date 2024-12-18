@@ -20,4 +20,9 @@ class Reserva extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
+
+    public function tipoevento()
+    {
+        return $this->belongsTo(TipoEvento::class, 'tipo_evento_id');
+    }
 }

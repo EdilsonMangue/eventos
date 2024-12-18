@@ -24,6 +24,19 @@ class servicoController extends Controller
         }
     }
 
+    public function servivos_cliente()
+    {
+        try {
+            $servicos = Servico::get();
+
+            return view('userCliente.servicos', ['servicos' => $servicos]);
+        } catch (\Throwable $th) {
+            //throw $th;
+
+            return $th->getMessage();
+        }
+    }
+
     public function create()
     {
         try {

@@ -1,18 +1,18 @@
-@extends('layouts.main')
+@extends('layouts.main_cliente')
 
 @section('content')
     
 
 <div class="container-fluid px-4">
     <div class="row my-5">
-            <form action="/reserva" method="POST">
+            <form action="/reserva-cliente" method="POST">
                 @csrf
                 @method('POST')
           <div id="error">
             
           </div>
 
-          <div class="col-md-12">
+          {{-- <div class="col-md-12">
           <label for="sucursal"class="form-label">Cliente <span class="text-danger">*</span></label>
           <select name="cliente" id="cliente" class="form-select form-select-sm">
             <option value=""></option>
@@ -23,7 +23,7 @@
 
          
           </select>
-        </div>
+        </div> --}}
          
              {{-- <input type="text" list="optionList" class="form-control" id="options" placeholder="Select an option">
             <datalist id="optionList">
@@ -32,16 +32,6 @@
             <option value="{{$cliente->id}}">{{$cliente->name}}</option>
                 @endforeach
             </datalist> --}}
-
-            <div class="col-md-12">
-                <label for="sucursal"class="form-label">Tipo de Evento <span class="text-danger">*</span></label>
-                <select name="tipo_evento" id="tipo_evento" class="form-select form-select-sm">
-                  <option value=""></option>
-                  @foreach($tipos as $tipo)
-                  <option value="{{$tipo->id}}">{{$tipo->name}}</option>
-                  @endforeach
-              </select>
-              </div>
             <div class="col-md-12">
                 <div class="row">
 
@@ -65,6 +55,17 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-12">
+        <label for="sucursal"class="form-label">Tipo de Evento <span class="text-danger">*</span></label>
+        <select name="tipo_evento" id="tipo_evento" class="form-select form-select-sm">
+          <option value=""></option>
+          @foreach($tipos as $tipo)
+          <option value="{{$tipo->id}}">{{$tipo->name}}</option>
+          @endforeach
+      </select>
+      </div>
+
             <div class="col-md-12">
           <label for="sucursal"class="form-label">Selecione os servicos <span class="text-danger">*</span></label>
           <br>

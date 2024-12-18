@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main_cliente')
 
 @section('content')
     
@@ -11,7 +11,7 @@
       <div class="modal-content">
         <div class="modal-header">
         </div>
-        <form action="/funcionario/delete" method="post">
+        <form action="/servico/delete" method="post">
             @csrf
             @method('DELETE')
         <div class="modal-body">
@@ -28,44 +28,38 @@
   </div>
 <div class="container-fluid px-4">
     <div class="row my-5">
-        <div class="text-end">
-            <a href="/funcionario_create" class="btn btn-primary" style="width: 140px;">
+        {{-- <div class="text-end">
+            <a href="/servico-create" class="btn btn-primary" style="width: 140px;">
                 <i
-                class=" fas fa-solid fa-plus me-1"></i>   Funcionario
+                class=" fas fa-solid fa-plus me-1"></i>  Serviço
             </a>
-        </div>
+        </div> --}}
         <!-- Button trigger modal -->
 
  
-        <h3 class="fs-4 mb-3">Funcionarios</h3>
+        <h3 class="fs-4 mb-3">Serviços</h3>
         <div class="col">
             <table class="table bg-white rounded shadow-sm  table-hover">
                 <thead>
                     <tr>
                         <th scope="col">Nome</th>
-                        <th scope="col">Local</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Número de BI</th>
-                        <th scope="col">Acao</th>
+                        <th scope="col">Preço</th>
                     </tr>
                 </thead>
                 <tbody>
-                 @foreach($funcionarios as $funcionario)
+                 @foreach($servicos as $servico)
                  <tr>
-                    <td>{{$funcionario->name}}</td>
-                    <td>{{$funcionario->email}}</td>
-                    <td>{{$funcionario->contacto}}</td>
-                    <td>{{$funcionario->nr_bi}}</td>
-                    <td>
-                        <a href="/funcionario/{{$funcionario->id}}" class="btn btn-sm"><i class="far fa-edit"></i></a>
-                        <button  value="{{$funcionario->id}}"  class="btn btn-sm" id="delete_btn" ><i class="fas fa-solid fa-trash"></i></button>
-                    </td>
+                    <td>{{$servico->name}}</td>
+                    <td>{{$servico->preco}}</td>
+                    {{-- <td>
+                        <a href="/servico/{{$servico->id}}" class="btn btn-sm"><i class="far fa-edit"></i></a>
+                        <button  value="{{$servico->id}}"  class="btn btn-sm" id="delete_btn" ><i class="fas fa-solid fa-trash"></i></button>
+                    </td> --}}
                  </tr>
                  @endforeach
                   
                 </tbody>
             </table>
-            {{ $funcionarios->links() }}
         </div>
     </div>
 </div>

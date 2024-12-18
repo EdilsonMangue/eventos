@@ -37,7 +37,7 @@
         <!-- Button trigger modal -->
 
  
-        <h3 class="fs-4 mb-3">Tipos de Eventos</h3>
+        <h3 class="fs-4 mb-3">Clientes</h3>
         <div class="col">
             <table class="table bg-white rounded shadow-sm  table-hover">
                 <thead>
@@ -53,11 +53,11 @@
                  @foreach($clientes as $cliente)
                  <tr>
                     <td>{{$cliente->name}}</td>
-                    <td>{{$cliente->email}}</td>
+                    <td>{{$cliente?->user?->email}}</td>
                     <td>{{$cliente->telephone}}</td>
                     <td>{{$cliente->endereco}}</td>
                     <td>
-                        <a href="/tipoevento/{{$cliente->id}}" class="btn btn-sm"><i class="far fa-edit"></i></a>
+                        <a href="/cliente/{{$cliente->id}}" class="btn btn-sm"><i class="far fa-edit"></i></a>
                         <button  value="{{$cliente->id}}"  class="btn btn-sm" id="delete_btn" ><i class="fas fa-solid fa-trash"></i></button>
                     </td>
                  </tr>
@@ -65,6 +65,7 @@
                   
                 </tbody>
             </table>
+            {{ $clientes->links() }}
         </div>
     </div>
 </div>

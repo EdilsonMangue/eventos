@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main_cliente')
 
 @section('content')
     <div class="container-fluid">
@@ -17,7 +17,7 @@
                 <p>Estado</p>
                 <p id="servicos">{{$reservas->status}}</p>
                 </div>
-    
+
             <div class="col-md-3">
                 <p>Total</p>
                 <p id="total">{{$reservas->total}}</p>

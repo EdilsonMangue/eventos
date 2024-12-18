@@ -14,7 +14,7 @@ class EventoController extends Controller
     public function index()
     {
         try {
-             $evento  = Evento::with('tipo')->get();
+             $evento  = Evento::with('tipo')->orderBy('id','DESC')->paginate(15);
 
              //return $evento;
              return view('evento.index', ['eventos' => $evento]);
