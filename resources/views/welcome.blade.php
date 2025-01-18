@@ -94,7 +94,7 @@
                     <div class="card-body">
                       <h5 class="card-title">Special title treatment</h5>
                       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    
                     </div>
                   </div>
                 </div>
@@ -103,7 +103,7 @@
                     <div class="card-body">
                       <h5 class="card-title">Special title treatment</h5>
                       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    
                     </div>
                   </div>
                 </div>
@@ -112,7 +112,7 @@
                       <div class="card-body">
                         <h5 class="card-title">Special title treatment</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      
                       </div>
                     </div>
                   </div>
@@ -121,7 +121,7 @@
                       <div class="card-body">
                         <h5 class="card-title">Special title treatment</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      
                       </div>
                     </div>
                   </div>
@@ -249,7 +249,7 @@
   📌08:00 até 17:00 (dias úteis);
  📌Decoração e Gestão de eventos;
  📍Localizados em Maputo, Moçambique.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    
                     </div>
                   </div>
                 </div>
@@ -261,7 +261,7 @@
 Reservas
 Cartão de Crédito
 Acessibilidade e Mobilidade para Todos</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    
                     </div>
                   </div>
                 </div>
@@ -273,7 +273,7 @@ Acessibilidade e Mobilidade para Todos</p>
   📌08:00 até 17:00 (dias úteis);
  📌Decoração e Gestão de eventos;
  📍Localizados em Maputo, Moçambique</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      
                       </div>
                     </div>
                   </div>
@@ -286,7 +286,7 @@ Acessibilidade e Mobilidade para Todos</p>
 Morada
 Av 24 de julho No.2006
 Alto MaéMaputo Cidade</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      
                       </div>
                     </div>
                   </div>

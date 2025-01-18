@@ -106,13 +106,15 @@
                                   {{-- <li><hr class="dropdown-divider"></li>
                                     <li><a href="/evento" class="link-dark text-decoration-none ps-4 d-block">Evento</a></li> --}}
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a href="/reserva" class="link-dark text-decoration-none ps-4 d-block">Reserva</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a href="/servico" class="link-dark text-decoration-none ps-4 d-block">Servico</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a href="/pacote" class="link-dark text-decoration-none ps-4 d-block">Pacote</a></li>
-                                    <li><hr class="dropdown-divider"></li>
                                     <li><a href="/tipoevento" class="link-dark text-decoration-none ps-4 d-block">Tipo de Evento</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a href="/servico" class="link-dark text-decoration-none ps-4 d-block">Serviço</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a href="/reserva" class="link-dark text-decoration-none ps-4 d-block">Reserva</a></li>
+                                    
+                                    {{-- <li><hr class="dropdown-divider"></li>
+                                    <li><a href="/pacote" class="link-dark text-decoration-none ps-4 d-block">Pacote</a></li> --}}
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -126,7 +128,7 @@
                             <div class="collapse" id="submenuUtilizador">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                   <li><hr class="dropdown-divider"></li>
-                                    <li><a href="/funcionario" class="link-dark text-decoration-none ps-4 d-block">Funcionario</a></li>
+                                    <li><a href="/funcionario" class="link-dark text-decoration-none ps-4 d-block">Administrador</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a href="/users" class="link-dark text-decoration-none ps-4 d-block">Utilizador</a></li>
                                     

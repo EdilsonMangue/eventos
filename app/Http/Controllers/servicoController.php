@@ -41,9 +41,9 @@ class servicoController extends Controller
     {
         try {
             //code...
-            $pacotes = Pacote::all();
+           
 
-            return view('servico.create', ['pacotes' => $pacotes]);
+            return view('servico.create');
         } catch (\Throwable $th) {
             //throw $th;
             return $th->getMessage();
@@ -59,13 +59,13 @@ class servicoController extends Controller
             //code...
             $servico = new Servico();
             $servico->name = $request->name;
-            $servico->pacote_id = $request->pacote;
+            // $servico->pacote_id = $request->pacote;
             $servico->preco = $request->preco;
             $servico->save();
-            return redirect()->route('servico.index');
+            return redirect()->route('servico.index')->with('success', 'serviço criado com sucesso!');
         } catch (\Throwable $th) {
             //throw $th;
-            return $th->getMessage();
+            return redirect()->route('servico.index')->with('error','Falha ao criar serviço');
         }
     }
 
@@ -78,9 +78,8 @@ class servicoController extends Controller
         try {
             //code...
             $servico = Servico::find($id);
-            $pacotes = Pacote::all();
 
-            return view('servico.editar', ['servico' => $servico, 'pacotes' => $pacotes]);
+            return view('servico.editar', ['servico' => $servico]);
 
         } catch (\Throwable $th) {
             //throw $th;
@@ -98,14 +97,14 @@ class servicoController extends Controller
             $servico = Servico::find($id);
 
             $servico->name = $request->name;
-            $servico->pacote_id = $request->pacote;
+            // $servico->pacote_id = $request->pacote;
             $servico->preco = $request->preco;
             $servico->update();
-            return redirect()->route('servico.index');
+            return redirect()->route('servico.index')->with('update','Serviço atualizado com sucesso!');
 
         } catch (\Throwable $th) {
             //throw $th;
-            return $th->getMessage();
+            return redirect()->route('servico.index')->with('error','Falha ao atualizar Serviço.');
         }
     }
 
@@ -120,11 +119,11 @@ class servicoController extends Controller
             //code...
             $servico = Servico::find($request->id);
             $servico->delete();
-            return redirect()->route('servico.index');
+            return redirect()->route('servico.index')->with('delete', 'Serviço apagado com sucesso!');
         } catch (\Throwable $th) {
             //throw $th;
 
-            return $th->getMessage();
+            return redirect()->route('servico.index')->with('error', 'Falha ao apagar serviço.');
         }
     }
 }

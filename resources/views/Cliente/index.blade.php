@@ -3,6 +3,23 @@
 @section('content')
     
 
+@if(session('success'))
+<div class="alert alert-success" role="alert">
+{{session('success')}}
+</div>
+@elseif(session('update'))
+<div class="alert alert-success" role="alert">
+{{session('update')}}
+ </div>
+@elseif(session('error'))
+<div class="alert alert-danger" role="alert">
+  {{session('error')}}
+</div>
+@elseif(session('delete'))
+<div class="alert alert-danger" role="alert">
+  {{session('delete')}}
+</div>
+@endif
   
   {{--Delete Modal--}}
 
@@ -11,7 +28,7 @@
       <div class="modal-content">
         <div class="modal-header">
         </div>
-        <form action="/tipoevento/delete" method="post">
+        <form action="/cliente/delete" method="post">
             @csrf
             @method('DELETE')
         <div class="modal-body">

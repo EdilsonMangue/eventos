@@ -17,7 +17,7 @@
           <label for="sucursal"class="form-label">Preco <span class="text-danger">*</span></label>
           <input type="number" value="{{$servico->preco}}"  name="preco" id="preco" class="form-control form-control-sm">
 
-          <label for="sucursal"class="form-label">Nome <span class="text-danger">*</span></label>
+          {{-- <label for="sucursal"class="form-label">Nome <span class="text-danger">*</span></label>
          <select name="pacote" id="pacote" class="form-select form-select-sm" >
             <option value=""></option>
             @foreach($pacotes as $pacote)
@@ -27,7 +27,7 @@
             <option value="{{$pacote->id}}" >{{$pacote->name}}</option>
             @endif
             @endforeach
-         </select>
+         </select> --}}
          
         <div class="mt-3">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

@@ -2,7 +2,23 @@
 
 @section('content')
     
-
+@if(session('success'))
+<div class="alert alert-success" role="alert">
+{{session('success')}}
+</div>
+@elseif(session('update'))
+<div class="alert alert-success" role="alert">
+{{session('update')}}
+ </div>
+@elseif(session('error'))
+<div class="alert alert-danger" role="alert">
+  {{session('error')}}
+</div>
+@elseif(session('delete'))
+<div class="alert alert-danger" role="alert">
+  {{session('delete')}}
+</div>
+@endif
   
  {{--Delete Modal--}}
 
@@ -83,7 +99,7 @@
                     <tr>
                         <th scope="col">Cliente</th>
                         <th scope="col">Data</th>
-                        <th scope="col">servicos</th>
+                        <th scope="col">serviços</th>
                         <th scope="col">Valor</th>
                         <th scope="col">Status</th>
                         <th scope="col"></th>

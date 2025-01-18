@@ -47,10 +47,10 @@ class ClienteController extends Controller
 
             $client->save();
 
-            return redirect()->route('cliente.index');
+            return redirect()->route('cliente.index')->with('success', 'Cliente criado com sucesso!');
        } catch (\Throwable $th) {
            
-           return $th->getMessage();
+           return redirect()->route('cliente.index')->with('error','Falha ao criar cliente');
        }
     }
 
@@ -86,16 +86,26 @@ class ClienteController extends Controller
 
             $user->update();
 
-            return redirect()->route('cliente.index');
+            return redirect()->route('cliente.index')->with('update','Cliente atualizado com sucesso!');
         } catch (\Throwable $th) {
-           return $th->getMessage();        }
+           return redirect()->route('cliente.index')->with('error','Falha ao atualizar cliente.');  
+             }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        try {
+            $tipo = Cliente::find($request->id);
+            $tipo->delete();
+
+            return redirect()->route('cliente.index')->with('delete', 'Cliente apagado com sucesso!');
+        } catch (\Throwable $th) {
+            //throw $th;
+
+            return redirect()->route('cliente.index')->with('error', 'Falha ao apagar cliente.');
+        }
     }
 }

@@ -32,9 +32,9 @@ class TipoEventoController extends Controller
             $tipo->name = $request->name;
             $tipo->save();
 
-            return redirect()->route('tipoevento.index');
+            return redirect()->route('tipoevento.index')->with('success', 'Tipo de evento criado com sucesso!');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            return   redirect()->route('tipoevento.index')->with('success', 'Falha ao criar o tipo de evento.');
         }
     }
 
@@ -63,10 +63,10 @@ class TipoEventoController extends Controller
             $tipo->name = $request->name;
             $tipo->update();
 
-            return redirect()->route('tipoevento.index');
+            return redirect()->route('tipoevento.index')->with('update', 'Tipo de evento atualizado com sucesso!');
         } catch (\Throwable $th) {
             //throw $th;
-            return $th->getMessage();
+            return redirect()->route('tipoevento.index')->with('errror', 'Falha ao atualizar o tipo de evento.');
         }
     }
 
@@ -79,11 +79,11 @@ class TipoEventoController extends Controller
             $tipo = TipoEvento::find($request->id);
             $tipo->delete();
 
-            return redirect()->route('tipoevento.index');
+            return redirect()->route('tipoevento.index')->with('delete', 'Tipo de evento apagado com sucesso!');
         } catch (\Throwable $th) {
             //throw $th;
 
-            return $th->getMessage();
+            return redirect()->route('tipoevento.index')->with('error', 'Falha ao apagar o tipo de evento.');
         }
     }
 }

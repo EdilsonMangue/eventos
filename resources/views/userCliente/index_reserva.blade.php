@@ -2,8 +2,15 @@
 
 @section('content')
     
-
-  
+@if(session('success'))
+<div class="alert alert-success" role="alert">
+ Reserva criada com sucesso
+</div>
+@elseif(session('error'))
+<div class="alert alert-danger" role="alert">
+ Falha ao criar uma reserva
+</div>
+@endif
  {{--Delete Modal--}}
 
  <div class="modal fade" id="paid_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

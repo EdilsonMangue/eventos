@@ -22,12 +22,12 @@
           </select>
 
 
-          <label for="sucursal"class="form-label">Estado <span class="text-danger">*</span></label>
+          {{-- <label for="sucursal"class="form-label">Estado <span class="text-danger">*</span></label>
           <select name="status" id="status" class="form-select form-select-sm">
             <option value=""></option>
             <option value="pendente">Pendente</option>
             <option value="cancelado">Cancelado</option>
-          </select>
+          </select> --}}
 
           <div class="col-md-12">
             <div class="row">
@@ -58,9 +58,9 @@
           <label for="sucursal"class="form-label">Selecione os servicos <span class="text-danger">*</span></label>
           <br>
        
-          @foreach($pacotes as $pacote)
-          <label for="sucursal" class="form-label">{{ $pacote->name }} <span class="text-danger">*</span></label>
-          @foreach($pacote->servicos as $servico)
+          {{-- @foreach($pacotes as $pacote)
+          <label for="sucursal" class="form-label">{{ $pacote->name }} <span class="text-danger">*</span></label> --}}
+          @foreach($servicos as $servico)
               @php
                   $item = $reserva->itens->firstWhere('servico_id', $servico->id);
               @endphp
@@ -89,7 +89,7 @@
                         </div>
               </div>
           @endforeach
-      @endforeach
+      {{-- @endforeach --}}
 </div>
 </div>
           

@@ -1,7 +1,23 @@
 @extends('layouts.main')
 
 @section('content')
-    
+@if(session('success'))
+<div class="alert alert-success" role="alert">
+{{session('success')}}
+</div>
+@elseif(session('update'))
+<div class="alert alert-success" role="alert">
+{{session('update')}}
+ </div>
+@elseif(session('error'))
+<div class="alert alert-danger" role="alert">
+  {{session('error')}}
+</div>
+@elseif(session('delete'))
+<div class="alert alert-danger" role="alert">
+  {{session('delete')}}
+</div>
+@endif
 
   
   {{--Delete Modal--}}
@@ -29,7 +45,7 @@
 <div class="container-fluid px-4">
     <div class="row my-5">
         <div class="text-end">
-            <a href="/tipoevento-create" class="btn btn-primary" style="width: 140px;">
+            <a href="/tipoevento-create" class="btn btn-primary" style="width: 160px;">
                 <i
                 class=" fas fa-solid fa-plus me-1"></i>   Tipo de Evento
             </a>

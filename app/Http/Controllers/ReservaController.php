@@ -51,10 +51,11 @@ class ReservaController extends Controller
 
         try {
 
-            $pacote = Pacote::with('servicos')->get();
+            // $pacote = Pacote::with('servicos')->get();
+            $servico = Servico::get();
             $clientes = Cliente::get();
             $tipos = TipoEvento::all();
-            return view('reserva.create', ['pacotes' => $pacote, 'clientes' => $clientes, 'tipos' => $tipos]);
+            return view('reserva.create', ['servicos' => $servico, 'clientes' => $clientes, 'tipos' => $tipos]);
         } catch (\Throwable $th) {
             //throw $th;
             $th->getMessage();
@@ -66,9 +67,9 @@ class ReservaController extends Controller
         
         try {
 
-            $pacote = Pacote::with('servicos')->get();
+            $servico = Servico::get();
             $tipos = TipoEvento::all();
-            return view('userCliente.create_reserva', ['pacotes' => $pacote,'tipos' => $tipos]);
+            return view('userCliente.create_reserva', ['servicos' => $servico,'tipos' => $tipos]);
         } catch (\Throwable $th) {
             //throw $th;
             $th->getMessage();
@@ -133,11 +134,11 @@ class ReservaController extends Controller
 
            
 
-            return redirect()->route('reserva.index');
+            return redirect()->route('reserva.index')->with('success', 'Reserva criada com sucesso!');;
         } catch (\Throwable $th) {
             //throw $th;
 
-            return $th->getMessage();
+            return redirect()->route('reserva.index')->with('error','Falha ao criar reserva');
         }
     }
 
@@ -199,11 +200,11 @@ class ReservaController extends Controller
 
            
 
-            return redirect()->route('reserva.cliente');
+            return redirect()->route('reserva.cliente')->with('success','sucesso');
         } catch (\Throwable $th) {
             //throw $th;
 
-            return $th->getMessage();
+            return redirect()->route('reserva.cliente')->with('error','erro');
         }
     }
     /**
@@ -251,10 +252,10 @@ class ReservaController extends Controller
     {
         $reserva =  Reserva::with(['itens.servico', 'cliente'])->find($id);
 
-        $pacote = Pacote::with('servicos')->get();
+        $servico = Servico::get();
         $clientes = Cliente::get();
 
-        return view('reserva.editar', ['reserva' => $reserva, 'pacotes' => $pacote, 'clientes' => $clientes]);
+        return view('reserva.editar', ['reserva' => $reserva, 'servicos' => $servico, 'clientes' => $clientes]);
     }
     /**
      * Update the specified resource in storage.
@@ -285,7 +286,7 @@ class ReservaController extends Controller
                  $reserva =  Reserva::find($id);
                  $reserva->cliente_id = $request->cliente;
                 // $reserva->user_id = Auth::user()->id;
-                 $reserva->status =  $request->status;
+                // $reserva->status =  $request->status;
                  $reserva->total = $total;
                  $reserva->data_inicio = $request->data_inicio;
                  $reserva->data_fim = $request->data_fim;
@@ -317,9 +318,9 @@ class ReservaController extends Controller
     
                
     
-                return redirect()->route('reserva.index');
+                return redirect()->route('reserva.index')->with('update','Reserva atualizado com sucesso!');
         } catch (\Throwable $th) {
-           return $th->getMessage();
+           return  redirect()->route('reserva.index')->with('error','Falha ao atualizar Reserva.');;
         }
     }
     
@@ -347,10 +348,10 @@ class ReservaController extends Controller
              $pagamento->valor = $request->total;
              $pagamento->save();
 
-             return redirect()->route('reserva.index');
+             return redirect()->route('reserva.index')->with('update','Pagamento feito com sucesso!');;
 
         } catch (\Throwable $th) {
-           return $th->getMessage();
+           return redirect()->route('reserva.index')->with('error','Falha ao pagamento.');
         }
     }
 }

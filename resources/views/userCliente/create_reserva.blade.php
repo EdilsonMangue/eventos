@@ -1,16 +1,17 @@
 @extends('layouts.main_cliente')
 
 @section('content')
-    
+   
 
 <div class="container-fluid px-4">
     <div class="row my-5">
+
+        
             <form action="/reserva-cliente" method="POST">
                 @csrf
                 @method('POST')
-          <div id="error">
-            
-          </div>
+          
+
 
           {{-- <div class="col-md-12">
           <label for="sucursal"class="form-label">Cliente <span class="text-danger">*</span></label>
@@ -69,10 +70,10 @@
             <div class="col-md-12">
           <label for="sucursal"class="form-label">Selecione os servicos <span class="text-danger">*</span></label>
           <br>
-
+{{-- 
           @foreach($pacotes as $pacote)
-    <label for="sucursal" class="form-label">{{$pacote->name}} <span class="text-danger">*</span></label>
-    @foreach($pacote->servicos as $servico)
+    <label for="sucursal" class="form-label">{{$pacote->name}} <span class="text-danger">*</span></label> --}}
+    @foreach($servicos as $servico)
         <div class="form-check d-flex mt-2">
             <!-- Checkbox para o serviço -->
             <div class="col-md-12">
@@ -101,7 +102,7 @@
         </div>
     </div>
     @endforeach
-@endforeach
+{{-- @endforeach --}}
 </div>
           
           

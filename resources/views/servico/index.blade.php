@@ -2,7 +2,23 @@
 
 @section('content')
     
-
+@if(session('success'))
+<div class="alert alert-success" role="alert">
+{{session('success')}}
+</div>
+@elseif(session('update'))
+<div class="alert alert-success" role="alert">
+{{session('update')}}
+ </div>
+@elseif(session('error'))
+<div class="alert alert-danger" role="alert">
+  {{session('error')}}
+</div>
+@elseif(session('delete'))
+<div class="alert alert-danger" role="alert">
+  {{session('delete')}}
+</div>
+@endif
   
   {{--Delete Modal--}}
 
@@ -43,6 +59,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Nome</th>
+                        <th scope="col">Preço</th>
                         <th scope="col">Acao</th>
                     </tr>
                 </thead>
@@ -50,6 +67,7 @@
                  @foreach($servicos as $servico)
                  <tr>
                     <td>{{$servico->name}}</td>
+                    <td>{{$servico->preco}}</td>
                     <td>
                         <a href="/servico/{{$servico->id}}" class="btn btn-sm"><i class="far fa-edit"></i></a>
                         <button  value="{{$servico->id}}"  class="btn btn-sm" id="delete_btn" ><i class="fas fa-solid fa-trash"></i></button>

@@ -69,9 +69,9 @@
           <label for="sucursal"class="form-label">Selecione os servicos <span class="text-danger">*</span></label>
           <br>
 
-          @foreach($pacotes as $pacote)
-    <label for="sucursal" class="form-label">{{$pacote->name}} <span class="text-danger">*</span></label>
-    @foreach($pacote->servicos as $servico)
+          {{-- @foreach($pacotes as $pacote)
+    <label for="sucursal" class="form-label">{{$pacote->name}} <span class="text-danger">*</span></label> --}}
+    @foreach($servicos as $servico)
         <div class="form-check d-flex mt-2">
             <!-- Checkbox para o serviço -->
             <div class="col-md-12">
@@ -100,7 +100,7 @@
         </div>
     </div>
     @endforeach
-@endforeach
+{{-- @endforeach --}}
 </div>
           
           
